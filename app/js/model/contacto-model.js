@@ -11,9 +11,24 @@ var ContactoModel = Backbone.Model.extend({
         "nombre": "",
         "apellido": "",
         "alias"   : "",
-        "telefono" : "",
+        "telefono" : null,
         "email"    : "",
         "direccion" : "",
         "fechaCreacion" : ""
+    },
+    validate: function(attrs, options) {
+        console.log("validating");
+        if (attrs.nombre.trim().length==0) {
+            return "El nombre es obligatorio";
+        }
+        if (attrs.nombre.trim().length==0) {
+            return "El apellido es obligatorio";
+        }
+        if (attrs.telefono== null || attrs.telefono == "" || isNaN(attrs.telefono)) {
+            return "El telefono es obligatorio y debe ser un numero";
+        }
+        if (attrs.nombre.trim().length==0) {
+            return "El email es obligatorio";
+        }
     } 
-},{"sequence" : 0});
+},{"sequence" : 1});

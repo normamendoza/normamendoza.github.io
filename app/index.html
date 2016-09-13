@@ -15,6 +15,7 @@
     <script src="js/model/contacto-model.js"></script>
     <script src="js/collection/contacto-collection.js"></script>
     <!--DATATABLES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js"></script>
     <script src="js/datatables/jquery.dataTables.min.js"></script>
     <script src="js/datatables/dataTables.bootstrap.min.js"></script>
     <link href="css/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
@@ -27,6 +28,11 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+    function isEmpty(str){
+        return str == null || str.trim().lenght== 0;
+    }
+    </script>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -42,8 +48,8 @@
 
     <section style="margin: 20px;">
         <div class="row">
-            <section class="col-md-5" id="formulario-contacto"></section>
-            <section class="col-md-7" id="lista-contacto"></section>
+            <section class="col-md-3" id="formulario-contacto"></section>
+            <section class="col-md-9" id="lista-contacto"></section>
         </div>
     </section>
 

@@ -38,19 +38,22 @@ var AppRouter = Backbone.Router.extend({
      */
     initialize: function () {
         this.collection = new ContactoCollection();
+        model = new ContactoModel();
     },
 
     /**
      * Se encarga de manejar el listado y alta de personas.
      */
     home: function () {
-        var view = new ListaContactoView({
+        if (this.listView)this.listView.cleanup();
+        this.listView = new ListaContactoView({
             collection: this.collection,
             el: $("#lista-contacto")
         });
         //se inicializa el formulario de alta de personas
         var model = new ContactoModel();
-        var form = new FormularioContactoView({
+        if (this.formView)this.formView.cleanup();
+        this.formView = new FormularioContactoView({
             collection: this.collection,
             data : model,
             el: $("#formulario-contacto")
@@ -58,7 +61,9 @@ var AppRouter = Backbone.Router.extend({
     },
     contactDetails: function(id) {
         var model = this.collection.get(id);
-        var form = new FormularioContactoView({
+        console.log(model);
+        if (this.formView)this.formView.cleanup();
+        this.formView =  new FormularioContactoView({
             collection: this.collection,
             data : model,
             el: $("#formulario-contacto")

@@ -21,10 +21,20 @@ var ListaContactoView = Backbone.View.extend({
         this.loadTemplate(function () {
             //una vez descargado el template se invoca al fetch para obtener los datos
             //del collection
-            thiz.collection.fetch();
+            thiz.collection.fetch({success: function (response) {
+                max = -1;
+                for(i in response.models){
+                    id = response.models[i].id;
+                    max = max < id ? id : max;
+                }
+                ContactoModel.sequence = max+1;
+            }});
         });
     },
-
+    cleanup: function() {
+        this.undelegateEvents();
+        $(this.el).empty();
+    },
     events: {
         "click .delete-btn": "delete"
     },
