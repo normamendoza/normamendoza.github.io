@@ -46,6 +46,8 @@ var FormularioContactoView = Backbone.View.extend({
     render: function () {
         var tmpl = _.template(this.template);
         //se añade el html resultante al contenedor del view.
+        this.data.attributes.notification = this.notification;
+        this.data.attributes.style = this.style;
         this.$el.html(tmpl(this.data.attributes));
         return this;
     },
@@ -63,33 +65,39 @@ var FormularioContactoView = Backbone.View.extend({
         });
         var model = null;
         var id = this.$el.find("#id").val();
+        var msg = null;
+        var style = null;
         if (id == null){
-            var now = new Date();
-            var formattedDate = moment(now).format("DD/MM/YYYY HH:mm:ss");
-            data["fechaCreacion"] = formattedDate;
             model = new ContactoModel(data);
-            model.set({id:model.constructor.sequence});
-            model.constructor.sequence++;
-
             if (!model.isValid()) {
-                 console.log("error");
-                 alert(model.validationError);
-                 return;
+                msg= model.validationError;
+                style = "alert alert-danger alert-dismissable";
+            }else{
+                var now = new Date();
+                var formattedDate = moment(now).format("DD/MM/YYYY HH:mm:ss");
+                model.set({fechaCreacion:formattedDate});
+                model.set({id:model.constructor.sequence});
+                model.constructor.sequence++;
+                this.collection.add(model);
+                msg = "Creado con éxito";
+                style = "alert alert-success alert-dismissable";
             }   
-            this.collection.add(model);
         }else {
             model = this.collection.get(id);
             modelOld = model;
             model.set(data);
             if (!model.isValid()) {
-                 model = modelOld;
-                 console.log("error");
-                 alert(model.validationError);
-                 return;
+                 msg = model.validationError;
+                 style = "alert alert-danger alert-dismissable";
+            }else {
+                msg = "Actualizado con éxito";
+                style = "alert alert-success alert-dismissable";
+                this.collection.trigger("change");
             }   
-            this.collection.trigger("change");
         }
         this.data = model;
+        this.notification = msg;
+        this.style = style;
         this.render();
     },
     borrar: function () {
@@ -97,10 +105,13 @@ var FormularioContactoView = Backbone.View.extend({
         model = this.collection.get(id);
         this.collection.remove(model);
         this.data = new ContactoModel();
+        this.notification = "Eliminado con éxito";
+        this.style = "alert alert-success alert-dismissable";
         this.render();
     },
     nuevo : function(){
         this.data = new ContactoModel();
+        this.notification = null;
         this.render();
     }
 });

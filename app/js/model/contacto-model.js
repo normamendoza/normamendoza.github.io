@@ -21,13 +21,13 @@ var ContactoModel = Backbone.Model.extend({
         if (attrs.nombre.trim().length==0) {
             return "El nombre es obligatorio";
         }
-        if (attrs.nombre.trim().length==0) {
+        if (attrs.apellido.trim().length==0) {
             return "El apellido es obligatorio";
         }
         if (attrs.telefono== null || attrs.telefono == "" || isNaN(attrs.telefono)) {
             return "El telefono es obligatorio y debe ser un numero";
         }
-        if (attrs.nombre.trim().length==0) {
+        if (attrs.email.trim().length==0) {
             return "El email es obligatorio";
         }
     } 

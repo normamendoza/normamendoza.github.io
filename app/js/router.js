@@ -56,6 +56,7 @@ var AppRouter = Backbone.Router.extend({
         this.formView = new FormularioContactoView({
             collection: this.collection,
             data : model,
+            notification : null,
             el: $("#formulario-contacto")
         });
     },
@@ -66,6 +67,7 @@ var AppRouter = Backbone.Router.extend({
         this.formView =  new FormularioContactoView({
             collection: this.collection,
             data : model,
+            notification : null,
             el: $("#formulario-contacto")
         });
     },
