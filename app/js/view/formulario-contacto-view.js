@@ -34,10 +34,10 @@ var FormularioContactoView = Backbone.View.extend({
         });
     },
     modelRemove: function(model){
-        if (this.data && model.id === this.data.id){
-            this.data = new ContactoModel();
-            this.render();
-        }
+        this.data = new ContactoModel();
+        this.notification = "Eliminado con éxito";
+        this.style = "alert alert-success alert-dismissable";
+        this.render();
     },
     /**
      * Se encarga de renderizar el html de la página.
@@ -104,10 +104,6 @@ var FormularioContactoView = Backbone.View.extend({
         var id = this.$el.find("#id").val();
         model = this.collection.get(id);
         this.collection.remove(model);
-        this.data = new ContactoModel();
-        this.notification = "Eliminado con éxito";
-        this.style = "alert alert-success alert-dismissable";
-        this.render();
     },
     nuevo : function(){
         this.data = new ContactoModel();
