@@ -1,0 +1,21 @@
+[
+    {
+    	"id":1,
+        "nombre": "Juan",
+        "apellido": "Perez",
+        "alias": "juan.perez",
+        "telefono" : "112233",
+        "email" :"jperez@gmail.com",
+        "direccion": "San Juan Y Guaviyu",
+        "fechaCreacion" : "15/09/2016 23:12:50"
+    }, {
+    	"id":2,
+        "nombre": "Maria",
+        "apellido": "Perez",
+        "alias": "maria.perez",
+        "telefono" : "22222233",
+        "email" :"mperez@gmail.com",
+        "direccion": "Mcal Estigarribia",
+        "fechaCreacion" : "14/09/2016 15:14:10"
+    }
+]

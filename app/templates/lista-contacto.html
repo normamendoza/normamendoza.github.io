@@ -1,0 +1,85 @@
+<!-- templates/lista-persona-tmpl -->
+<div class="panel panel-default">
+    <div class="panel-heading">Listado de contactos</div>
+    <div class="panel-body">
+<div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped" id="contactTable">
+            <thead>
+                <tr>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Numero Contacto</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Alias</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Direccion</th>
+                    <th>Fecha Creacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% _.forEach(collection, function(item){ %>
+                    <tr>
+                        <td>
+                            <%=item.id %>
+                        </td>
+                        <td>
+                            <%=item.nombre %>
+                        </td>
+                        <td>
+                            <%=item.apellido %>
+                        </td>
+                        <td>
+                            <%=item.alias %>
+                        </td>
+                        <td>
+                            <%=item.telefono %>
+                        </td>
+                        <td>
+                            <%=item.email %>
+                        </td>
+                        <td>
+                            <%=item.direccion %>
+                        </td>
+                        <td>
+                            <%=item.fechaCreacion %>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-success" <%="href='#contactos/"+item.id+"'"%>><i class="glyphicon glyphicon-pencil"></i></a>
+                                <button class="btn btn-danger delete-btn" <%="data-id='"+item.id+"'"%>><i class="glyphicon glyphicon-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function(){
+
+            var table = $('#contactTable').DataTable();
+
+            $("#contactTable thead td input").on( 'keyup change', function () {
+                 table
+                .column( $(this).parent().index()+':visible' )
+                .search( this.value )
+                .draw();
+            });
+        });
+
+    </script>
+    </div>
+</div>
+<!-- Fin templates/lista-persona-tmpl -->
