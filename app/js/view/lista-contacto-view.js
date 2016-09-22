@@ -21,14 +21,7 @@ var ListaContactoView = Backbone.View.extend({
         this.loadTemplate(function () {
             //una vez descargado el template se invoca al fetch para obtener los datos
             //del collection
-            thiz.collection.fetch({success: function (response) {
-                max = -1;
-                for(i in response.models){
-                    id = response.models[i].id;
-                    max = max < id ? id : max;
-                }
-                ContactoModel.sequence = max+1;
-            }});
+            thiz.collection.fetch();
         });
     },
     cleanup: function() {
@@ -40,6 +33,11 @@ var ListaContactoView = Backbone.View.extend({
     },
     delete : function(ev){
         var modelId = $(ev.currentTarget).data('id');
+        var model = this.collection.get(modelId);
+        console.log("destroy..");
+        console.log(model);
+        console.log(model.get("id"));
+        model.destroy({success: function(){console.log("elimiado con exito");},error: function(){console.log("no eliminado");}});
         this.collection.remove(modelId);
     },
     /**

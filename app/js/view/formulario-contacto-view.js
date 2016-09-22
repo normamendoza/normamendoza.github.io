@@ -76,9 +76,12 @@ var FormularioContactoView = Backbone.View.extend({
                 var now = new Date();
                 var formattedDate = moment(now).format("DD/MM/YYYY HH:mm:ss");
                 model.set({fechaCreacion:formattedDate});
-                model.set({id:model.constructor.sequence});
-                model.constructor.sequence++;
-                this.collection.add(model);
+                //model.set({id:model.constructor.sequence});
+                //model.constructor.sequence++;
+                //this.collection.add(model);
+                console.log("creando objeto");
+                console.log(model);
+                this.collection.create(model);
                 msg = "Creado con éxito";
                 style = "alert alert-success alert-dismissable";
             }   
@@ -90,6 +93,7 @@ var FormularioContactoView = Backbone.View.extend({
                  msg = model.validationError;
                  style = "alert alert-danger alert-dismissable";
             }else {
+                model.save();
                 msg = "Actualizado con éxito";
                 style = "alert alert-success alert-dismissable";
                 this.collection.trigger("change");
@@ -103,6 +107,7 @@ var FormularioContactoView = Backbone.View.extend({
     borrar: function () {
         var id = this.$el.find("#id").val();
         model = this.collection.get(id);
+        model.destroy();
         this.collection.remove(model);
     },
     nuevo : function(){

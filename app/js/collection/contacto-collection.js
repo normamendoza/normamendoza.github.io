@@ -3,6 +3,9 @@
  * fuente de datos para simular el GET para obtener los datos.
  */
 var ContactoCollection = Backbone.Collection.extend({
-    url: 'data/contacts.json',
-    model: ContactoModel
+    url: '/pwf/rest/agenda',
+    model: ContactoModel,
+    parse: function(data) {
+    	return data.lista;
+    }
 });
