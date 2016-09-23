@@ -57,48 +57,33 @@ var FormularioContactoView = Backbone.View.extend({
      * @function
      */
     guardar: function (ev) {
-    	console.log(ev);
         var data = {};
         //por cada input del view
         this.$el.find("[name]").each(function () {
             data[this.name] = this.value;
         });
-        var model = null;
         var id = this.$el.find("#id").val();
+		var newRecord = id == null;
+		var model = newRecord ? new ContactoModel():this.collection.get(id);
+        model.set(data);
         var msg = null;
         var style = null;
-        if (id == null){
-            model = new ContactoModel(data);
-            if (!model.isValid()) {
-                msg= model.validationError;
-                style = "alert alert-danger alert-dismissable";
-            }else{
-                var now = new Date();
-                var formattedDate = moment(now).format("DD/MM/YYYY HH:mm:ss");
-                model.set({fechaCreacion:formattedDate});
-                //model.set({id:model.constructor.sequence});
-                //model.constructor.sequence++;
-                //this.collection.add(model);
-                console.log("creando objeto");
-                console.log(model);
-                this.collection.create(model);
-                msg = "Creado con éxito";
-                style = "alert alert-success alert-dismissable";
-            }   
+		if (!model.isValid()) {
+            msg= model.validationError;
+            style = "alert alert-danger alert-dismissable";
         }else {
-            model = this.collection.get(id);
-            modelOld = model;
-            model.set(data);
-            if (!model.isValid()) {
-                 msg = model.validationError;
-                 style = "alert alert-danger alert-dismissable";
-            }else {
-                model.save();
-                msg = "Actualizado con éxito";
+			if (newRecord){
+				this.collection.create(model);
+				msg = "Creado con éxito";
+                style = "alert alert-success alert-dismissable";			
+			}else{
+				model.save();
+				msg = "Actualizado con éxito";
                 style = "alert alert-success alert-dismissable";
-                this.collection.trigger("change");
-            }   
-        }
+				this.collection.trigger("change");			
+			}		
+		}
+
         this.data = model;
         this.notification = msg;
         this.style = style;

@@ -14,7 +14,7 @@ var ContactoModel = Backbone.Model.extend({
         "telefono" : null,
         "email"    : "",
         "direccion" : "",
-        "fechaCreacion" : ""
+        "fechacreacion" : ""
     },
 	urlRoot : '/pwf/rest/agenda',
     validate: function(attrs, options) {
@@ -31,5 +31,10 @@ var ContactoModel = Backbone.Model.extend({
         if (attrs.email.trim().length==0) {
             return "El email es obligatorio";
         }
+    	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    	if (!re.test(attrs.email)){
+    		return "Debe ingresar un email correcto";
+    	}	
+		
     } 
-},{"sequence" : 1});
+});
