@@ -1,5 +1,7 @@
-# pwf-backbonejs
-Proyecto front base con backbonejs correspondiente al la materia Programación Web Frontend de la Facultad Politécnica de la Universidad nacional de Asunción. Abarca las clases de [SPA](https://docs.google.com/presentation/d/1HzVvagkthpFyy1S0a2YTGkABXIro947iEJECD1maMCg/edit?usp=sharing) y la [Introducción a BackboneJS](https://docs.google.com/presentation/d/1YDK8cRgy8FgxKBJpePyPuTBTaKVz3tpbqowkPbNSXH4/edit?usp=sharing).
+# Primer Parcial Programación Web Front End
+Proyecto front base con backbonejs y angular correspondiente al la materia Programación Web Frontend de la Facultad Politécnica de la Universidad Nacional de Asunción. 
+
+La dirección para acceder a la versión de backbone es: [https://normamendoza.github.io/app/](https://normamendoza.github.io/app/) y la version de angular es [https://normamendoza.github.io/app2/]:(https://normamendoza.github.io/app/).
 
 # Estructura directorios
 
@@ -9,3 +11,7 @@ Proyecto front base con backbonejs correspondiente al la materia Programación W
 > * data: directorio con datos estaticos utilizados para simular los GET.
 > * templates: templates de los views.
 > * js: archivos JS del proyecto.
+
+# Integrantes
+
+> * Norma Mendoza
