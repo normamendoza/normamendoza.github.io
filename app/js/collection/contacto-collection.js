@@ -3,7 +3,7 @@
  * fuente de datos para simular el GET para obtener los datos.
  */
 var ContactoCollection = Backbone.Collection.extend({
-    url: '/pwf/rest/agenda',
+    url: 'https://desa03.konecta.com.py/pwf/rest/agenda',
     model: ContactoModel,
     parse: function(data) {
     	return data.lista;

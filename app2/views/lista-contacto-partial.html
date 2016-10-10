@@ -1,0 +1,29 @@
+<!-- templates/lista-persona-partial -->
+<div class="panel panel-default">
+    <div class="panel-heading">Listado de contactos</div>
+    <div class="panel-body">
+        <div class="form-group col-lg-4 col-md-6 col-ms-12">
+             <label>Buscar:</label>
+             <input class="form-control" type="text" ng-model="filter" />
+        </div>
+        <table ng-table="tableParams" class="table" >
+            <tr ng-repeat="contacto in $data" style="text-align:center;">
+                <td title="'NUM'"> {{contacto.id}}</td>
+                <td title="'NOMBRE'">{{contacto.nombre}}</td>
+                <td title="'APELLIDO'">{{contacto.apellido}}</td>
+                <td title="'ALIAS'">{{contacto.alias}}</td>
+                <td title="'TELEFONO'">{{contacto.telefono}}</td>
+                <td title="'EMAIL'">{{contacto.email}}</td>
+                <td title="'DIRECCION'">{{contacto.direccion}}</td>
+                <td title="'FECHA CREACION'">{{contacto.fechacreacion | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}</td>
+                <td title="'ACCIONES'">
+                    <div class="row" style="margin-left: 0px;">
+                        <a class="btn btn-success" ng-click="editar(contacto.id)"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <button class="btn btn-danger delete-btn" ng-click="eliminar(contacto.id);"><i class="glyphicon glyphicon-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- Fin templates/lista-persona-partial -->

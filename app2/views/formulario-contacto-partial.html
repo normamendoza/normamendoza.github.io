@@ -1,0 +1,72 @@
+<div class="panel panel-default" ng-controller="formularioContactoCtrl">
+    <div class="panel-body">
+        <section class="form">
+           <div class="alert alert-success alert-dismissable" ng:if="success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<div>{{notificacion}}</div>
+	   </div>
+	   <div class="alert alert-danger alert-dismissable" ng:if="!success && notificacion">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<div>{{notificacion}}</div>
+	   </div>
+    <form name="contactoForm" novalidate>
+        <div ng-if="contacto.id">
+            <div class="form-group col-lg-6 col-md-6" >
+                <label>Id</label>
+                <input type="text" name="id" readonly="readonly" class="form-control" ng-model="contacto.id">
+            </div>            
+            <div class="form-group col-lg-6 col-md-6" >
+                <label>Fecha Creación</label>
+                <input type="datetime" name="fechacreacion" datetime="dd/MM/yyyy HH:mm" readonly="readonly" class="form-control" ng-model="contacto.fechacreacion">
+            </div>            
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : contactoForm.nombre.$touched && contactoForm.nombre.$invalid}">
+            <label>Nombre*</label>
+            <input type="text" name="nombre" class="form-control" ng-model="contacto.nombre" required>
+            <p ng-show="contactoForm.nombre.$invalid && contactoForm.nombre.$touched" class="help-block">Debe ingresar nombre.</p>
+        </div>
+        
+        <div class="form-group" ng-class="{ 'has-error' : contactoForm.apellido.$touched && contactoForm.apellido.$invalid}">
+            <label>Apellido*</label>
+            <input type="text" name="apellido" class="form-control" ng-model="contacto.apellido" required>
+            <p ng-show="contactoForm.apellido.$invalid && contactoForm.apellido.$touched" class="help-block">Debe ingresar apellido.</p>
+        </div>
+
+        <div class="form-group">
+            <label>Alias</label>
+            <input type="text" name="alias" class="form-control" ng-model="contacto.alias">
+        </div>
+
+        <div class="form-group">
+            <label>Direccion</label>
+            <input type="text" name="direccion" class="form-control" ng-model="contacto.direccion">
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : contactoForm.telefono.$touched && contactoForm.telefono.$invalid}">
+            <label>Teléfono*</label>
+            <input type="number" name="telefono" class="form-control" ng-model="contacto.telefono" required>
+            <p ng-show="contactoForm.telefono.$invalid && contactoForm.telefono.$touched" class="help-block">Debe ingresar un teléfono válido.</p>
+        </div>
+            
+        <div class="form-group" ng-class="{ 'has-error' : contactoForm.email.$touched && contactoForm.email.$invalid}">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="contacto.email" required>
+            <p ng-show="contactoForm.email.$invalid && contactoForm.eamil.$touched" class="help-block">Ingrese un email válido.</p>
+        </div>
+        
+    </form>
+    </section>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-default" ng-disabled="contactoForm.$invalid" ng-click="guardar()" role="button">
+            <i class="glyphicon glyphicon-floppy-disk"></i> &nbsp;Guardar
+        </button>
+        <button ng-if="contacto.id" class="btn btn-default" ng-disabled="contactoForm.$invalid" ng-click="eliminar(contacto.id); contactoForm.$setUntouched()" role="button">
+            <i class="glyphicon glyphicon-floppy-disk"></i> &nbsp;Eliminar
+        </button>
+		<button ng-if="contacto.id" class="btn btn-default" ng-click="nuevo(); contactoForm.$setUntouched()" role="button">
+            <i class="glyphicon glyphicon-plus"></i> &nbsp;Nuevo
+        </button>
+    </div>
+</div>
