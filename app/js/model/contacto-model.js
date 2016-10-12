@@ -16,7 +16,6 @@ var ContactoModel = Backbone.Model.extend({
         "direccion" : "",
         "fechacreacion" : ""
     },
-	urlRoot : '/pwf/rest/agenda',
     validate: function(attrs, options) {
         console.log("validating");
         if (attrs.nombre.trim().length==0) {

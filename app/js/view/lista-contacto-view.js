@@ -34,11 +34,14 @@ var ListaContactoView = Backbone.View.extend({
     delete : function(ev){
         var modelId = $(ev.currentTarget).data('id');
         var model = this.collection.get(modelId);
-        console.log("destroy..");
-        console.log(model);
-        console.log(model.get("id"));
-        model.destroy({success: function(){console.log("elimiado con exito");},error: function(){console.log("no eliminado");}});
-        this.collection.remove(modelId);
+        var that = this;
+        model.destroy({dataType : 'text',
+                    wait : true,
+                    error : function(err) {
+                        that.notification = "Ocurrio un error al eliminar registro";
+                        that.style = "alert alert-danger alert-dismissable";
+                        that.render();
+                    }});
     },
     /**
      * Se encarga de renderizar el html de la página.

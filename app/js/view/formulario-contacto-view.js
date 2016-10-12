@@ -66,34 +66,62 @@ var FormularioContactoView = Backbone.View.extend({
 		var newRecord = id == null;
 		var model = newRecord ? new ContactoModel():this.collection.get(id);
         model.set(data);
-        var msg = null;
-        var style = null;
+        var that = this;
 		if (!model.isValid()) {
-            msg= model.validationError;
-            style = "alert alert-danger alert-dismissable";
+			that.notification = model.validationError;
+        	that.style = "alert alert-danger alert-dismissable";
+        	that.render();
+        	return;
         }else {
 			if (newRecord){
-				this.collection.create(model);
-				msg = "Creado con éxito";
-                style = "alert alert-success alert-dismissable";			
+				this.collection.create(model, {
+    				wait : true,
+    				success : function(context, m, resp, callbackOpts){
+    					that.data = model;
+        				that.notification = "Creado con éxito";
+        				that.style = "alert alert-success alert-dismissable";
+        				that.collection.trigger("change");	
+        				that.render();
+    				},
+    				error : function(err) {
+        				that.data = model;
+        				that.notification = "Ocurrio un error al crear registro";
+        				that.style = "alert alert-danger alert-dismissable";
+        				that.render();
+    				}}
+    			);				
 			}else{
-				model.save();
-				msg = "Actualizado con éxito";
-                style = "alert alert-success alert-dismissable";
-				this.collection.trigger("change");			
+				model.save(null, {
+    				wait : true,
+    				success : function(context, m, resp, callbackOpts){
+    					that.data = model;
+        				that.notification = "Actualizado con éxito";
+        				that.style = "alert alert-success alert-dismissable";
+        				that.collection.trigger("change");	
+        				that.render();
+    				},
+    				error : function(err) {
+        				that.data = model;
+        				that.notification = "Ocurrio un error al actualizar registro";
+        				that.style = "alert alert-danger alert-dismissable";
+        				that.render();
+    				}});
 			}		
 		}
 
-        this.data = model;
-        this.notification = msg;
-        this.style = style;
-        this.render();
     },
     borrar: function () {
         var id = this.$el.find("#id").val();
         model = this.collection.get(id);
-        model.destroy();
-        this.collection.remove(model);
+        var that = this;
+        model.destroy({dataType : 'text',
+    				wait : true,
+    				error : function(err, error) {
+    					console.log(err);
+        				that.notification = "Ocurrio un error al eliminar registro";
+        				that.style = "alert alert-danger alert-dismissable";
+        				that.render();
+    				}});
     },
     nuevo : function(){
         this.data = new ContactoModel();

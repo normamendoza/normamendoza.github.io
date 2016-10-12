@@ -6,17 +6,6 @@
         <table class="table table-bordered table-hover table-striped" id="contactTable">
             <thead>
                 <tr>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="text" class="form-control"></td>
-                    <td></td>
-                </tr>
-                <tr>
                     <th>Numero Contacto</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -71,12 +60,6 @@
 
             var table = $('#contactTable').DataTable();
 
-            $("#contactTable thead td input").on( 'keyup change', function () {
-                 table
-                .column( $(this).parent().index()+':visible' )
-                .search( this.value )
-                .draw();
-            });
         });
 
     </script>
